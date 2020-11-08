@@ -1,4 +1,4 @@
-
+# pymath.py
 
 class Fraction:
     def __init__(self,numerator,denominator):
@@ -31,22 +31,21 @@ def _to_lowest(a: Fraction) -> Fraction:
 def int_to_fraction(a: int) -> Fraction:
     if type(a) != int:
         raise ValueError('Input parameter must be integer!')
-
     return Fraction(a,1)
     
 
 
 def sum_fractions(a: Fraction,b: Fraction) -> Fraction:
     gcd = euclid_gcd(a.denominator,b.denominator)
-    numerator_a = a.numerator * (gcd // a.denominator)
-    numerator_b = b.numerator * (gcd // b.denominator)
-    return _to_lowest(Fraction(numerator_a + numerator_b,gcd))
+    denominator = (a.denominator * b.denominator) // gcd
+    numerator = (a.numerator * (denominator // a.denominator)) + (b.numerator * (denominator // b.denominator))
+    return _to_lowest(Fraction(numerator,denominator))
 
 
 
 
-a = Fraction(1,2)
-b = Fraction(1,2)
+a = Fraction(1,500)
+b = Fraction(2,1500)
 
 c = sum_fractions(a,b)
 
