@@ -1,5 +1,13 @@
 # fractions.py
 
+"""
+This library implements a Fraction class enabling representation of real numbers.
+
+The basic operators add, subtract, multiply and divide can then be used with instances
+of the Fraction class. 
+"""
+
+
 class Fraction:
     def __init__(self,numerator,denominator):
         if type(numerator) != int or type(denominator) != int:
@@ -13,17 +21,17 @@ class Fraction:
 
 
 
+def integer_to_fraction(a: int) -> Fraction:
+    if type(a) != int:
+        raise ValueError('Input parameter must be integer!')
+    return Fraction(a,1)
+
+
+
 def euclid_gcd(a: int,b: int) -> int:
     while b:
         a,b = b, a % b
     return a
-
-
-
-def int_to_fraction(a: int) -> Fraction:
-    if type(a) != int:
-        raise ValueError('Input parameter must be integer!')
-    return Fraction(a,1)
     
 
 
@@ -32,7 +40,7 @@ def add_fractions(a: Fraction,b: Fraction) -> Fraction:
     denominator = (a.denominator * b.denominator) // gcd
     numerator = (a.numerator * (denominator // a.denominator)) + (b.numerator * (denominator // b.denominator))
     gcf = euclid_gcd(numerator,denominator)
-    return(Fraction(numerator // gcf,denominator // gcf))
+    return Fraction(numerator // gcf,denominator // gcf)
 
 
 
@@ -41,12 +49,20 @@ def subtract_fractions(a: Fraction,b: Fraction) -> Fraction:
     denominator = (a.denominator * b.denominator) // gcd
     numerator = (a.numerator * (denominator // a.denominator)) - (b.numerator * (denominator // b.denominator))
     gcf = euclid_gcd(numerator,denominator)
-    return(Fraction(numerator // gcf,denominator // gcf))
+    return (Fraction(numerator // gcf,denominator // gcf))
 
 
-a = Fraction(2,5)
-b = Fraction(1,4)
 
-c = subtract_fractions(a,b)
+def multiply_fractions(a: Fraction,b: Fraction) -> Fraction:
+    numerator = a.numerator * b.numerator
+    denominator = a.denominator * b.denominator
+    gcf = euclid_gcd(numerator,denominator)
+    return Fraction(numerator // gcf,denominator // gcf)
 
-c.show_fraction()
+
+
+def divide_fractions(a: Fraction,b: Fraction) -> Fraction:
+    numerator = a.numerator * b.denominator
+    denominator = b.numerator * a.denominator
+    gcf = euclid_gcd(numerator,denominator)
+    return Fraction(numerator // gcf,denominator // gcf)
