@@ -8,32 +8,46 @@ class Fraction:
         self.numerator = numerator
         self.denominator = denominator
 
+    def show_fraction(self):
+        print(self.numerator,'/',self.denominator)
 
 
-def gcd(a,b):
+
+def euclid_gcd(a: int,b: int) -> int:
     while b:
         a,b = b, a % b
+    return a
 
+
+
+def _to_lowest(a: Fraction) -> Fraction:
+    while a.denominator % 2 == 0:
+        a.numerator //= 2
+        a.denominator //= 2
+    return a
+
+
+
+def int_to_fraction(a: int) -> Fraction:
+    if type(a) != int:
+        raise ValueError('Input parameter must be integer!')
+
+    return Fraction(a,1)
     
 
 
-
+def sum_fractions(a: Fraction,b: Fraction) -> Fraction:
+    gcd = euclid_gcd(a.denominator,b.denominator)
+    numerator_a = a.numerator * (gcd // a.denominator)
+    numerator_b = b.numerator * (gcd // b.denominator)
+    return _to_lowest(Fraction(numerator_a + numerator_b,gcd))
 
 
 
 
 a = Fraction(1,2)
+b = Fraction(1,2)
 
+c = sum_fractions(a,b)
 
-#print(a.numerator)
-
-
-def computeGCD(x, y): 
-  
-   while(y): 
-       x, y = y, x % y 
-  
-   return x 
-
-
-print(computeGCD(4,37))
+c.show_fraction()
