@@ -16,8 +16,14 @@ class Fraction:
         self.numerator = numerator
         self.denominator = denominator
 
+        if self.denominator == 0:
+            raise ZeroDivisionError('Denominator cannot be 0!')
+
     def show_fraction(self):
-        print(self.numerator,'/',self.denominator)
+        if self.numerator == 0:
+            print(0)
+        else:
+            print(self.numerator,'/',self.denominator)
 
 
 
