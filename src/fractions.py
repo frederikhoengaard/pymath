@@ -9,7 +9,7 @@ of the Fraction class.
 
 
 class Fraction:
-    def __init__(self,numerator,denominator):
+    def __init__(self,numerator: int,denominator: int):
         if type(numerator) != int or type(denominator) != int:
             raise ValueError('Numerator and denominator must be integer values!')
 
